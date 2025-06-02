@@ -4,4 +4,5 @@ tldextract
 requests
 tqdm>=4.0.0
 Jinja2>=3.0
-rich 
+rich
+PyYAML
