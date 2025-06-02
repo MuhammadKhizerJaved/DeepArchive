@@ -5,4 +5,4 @@ requests
 tqdm>=4.0.0
 Jinja2>=3.0
 rich
-PyYAML
+PyYAML 

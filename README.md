@@ -12,7 +12,8 @@ Automated Passive & Active Web Archive Reconnaissance & Reporting Tool
 ## Workflow:
 ```mermaid
 flowchart TD
-    A["Start: User runs DeepArchive.py"] --> B{"Parse CLI Options"}
+    A["Start: User runs DeepArchive.py"] --> Z["Load config/default.config.yaml (defaults)"]
+    Z --> B{"Parse CLI Options (CLI overrides config)"}
     B -- Passive Only --> C["Run Passive Tools - gau, waybackurls, waymore"]
     B -- Active Enabled --> D["Run Active Tools - gospider, crawley, hakrawler, katana, cariddi"]
     C --> E["Aggregate URLs"]
@@ -204,7 +205,7 @@ DeepArchive uses an extensive and extensible set of regex patterns to detect sec
 - **High-entropy/generic secrets** (fallback patterns)
 
 All patterns are in `config/secret_patterns.txt` and can be extended by the user. The scanning logic splits multi-line strings and scans each line, so secrets in config dumps or embedded blocks are detected.
-Most of the secrts scaning right now are adobted from [https://github.com/streaak/keyhacks](https://github.com/streaak/keyhacks)
+Most of the secrts right now are adobted from [https://github.com/streaak/keyhacks](https://github.com/streaak/keyhacks)
 
 **To add new patterns:**
 - Edit `config/secret_patterns.txt` (format: `regex # Label`)
