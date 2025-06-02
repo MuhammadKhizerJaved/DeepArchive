@@ -48,6 +48,7 @@ flowchart TD
 - JS endpoint extraction
 - Robust error handling and graceful exit
 - Modern HTML report with search, filtering, and summary
+- YAML config file for persistent, user-editable defaults (config/default.config.yaml)
 ---
 ## 🛠️ Tool References
 
@@ -95,13 +96,19 @@ python3 DeepArchive.py -d <target> [options]
 
 ---
 
-**Python Requirements**
+## ⚙️ Default Configuration via YAML
 
-Install them with:
+DeepArchive supports a user-editable YAML config file for persistent defaults:
 
-```
-pip install -r requirements.txt
-```
+- **File:** `config/default.config.yaml`
+- **Purpose:** Set your preferred defaults for all major options (active mode, filter workers, JS concurrency, logging, etc.)
+- **How it works:**
+  - On startup, DeepArchive loads this file and uses its values as defaults for all CLI options.
+  - **Any CLI flag you provide will override the config value.**
+  - If you don't edit the file, the built-in defaults are used.
+
+**Note:** If you delete or rename the config file, DeepArchive will fall back to its built-in defaults.
+
 ---
 
 ## 📋 Example Commands
@@ -197,7 +204,7 @@ DeepArchive uses an extensive and extensible set of regex patterns to detect sec
 - **High-entropy/generic secrets** (fallback patterns)
 
 All patterns are in `config/secret_patterns.txt` and can be extended by the user. The scanning logic splits multi-line strings and scans each line, so secrets in config dumps or embedded blocks are detected.
-Most of the secrts right now are adobted from [https://github.com/streaak/keyhacks](https://github.com/streaak/keyhacks)
+Most of the secrts scaning right now are adobted from [https://github.com/streaak/keyhacks](https://github.com/streaak/keyhacks)
 
 **To add new patterns:**
 - Edit `config/secret_patterns.txt` (format: `regex # Label`)
@@ -227,7 +234,9 @@ Most of the secrts right now are adobted from [https://github.com/streaak/keyhac
 
 **Muhammad Khizer Javed**  
 [whoami.securitybreached.org](https://whoami.securitybreached.org)
-**A bunch of LLMs 🤖👀**
+
+**And a bunch of LLMs 🤖👀**
+
 ---
 
 ## 📢 Contributions & Feedback
